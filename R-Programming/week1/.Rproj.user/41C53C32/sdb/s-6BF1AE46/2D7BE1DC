@@ -1,0 +1,18 @@
+{
+    "contents" : "test_data<-read.table(file=\"C:\\\\Users\\\\cs\\\\Dropbox\\\\Connected Blue\\\\Training\\\\data science\\\\git\\\\datascience\\\\R-Programming\\\\week1\\\\bristol_spend.csv\", sep=\",\",header=TRUE, nrows=21)\n\ncoltypes=sapply(test_data, class)\n\nall_data<-read.table(file=\"C:\\\\Users\\\\cs\\\\Dropbox\\\\Connected Blue\\\\Training\\\\data science\\\\git\\\\datascience\\\\R-Programming\\\\week1\\\\bristol_spend.csv\", colClasses=coltypes, sep=\",\",header=TRUE, fill=TRUE)\n\n\n\n\n",
+    "created" : 1452254529465.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4131557023",
+    "id" : "2D7BE1DC",
+    "lastKnownWriteTime" : 1452261402,
+    "path" : "C:/Users/cs/Dropbox/Connected Blue/Training/data science/git/datascience/R-Programming/week1/read_data.R",
+    "project_path" : "read_data.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
