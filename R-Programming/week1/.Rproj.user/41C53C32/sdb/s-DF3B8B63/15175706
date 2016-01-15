@@ -1,0 +1,17 @@
+{
+    "contents" : "complete<-function(directory=\"C:\\\\Users\\\\cs\\\\Dropbox\\\\Connected Blue\\\\Training\\\\data science\\\\git\\\\datascience\\\\R-Programming\\\\week 2\\\\rprog-data-specdata\\\\specdata\", id=1:332) {\n  # Prepare to read in files from directory\n  library(readr)\n  files=list()\n  for (i in id) {\n    fn<-paste(sprintf(\"%03d\", i),\".csv\",sep=\"\")\n    files<-c(files,file.path(directory, fn, fsep = \"\\\\\"))\n  } # creates a list of files to read\n  filedata <- lapply(files, read_csv) # Puts all the files into filedata variable\n  #\n  result<-data.frame(id=integer(0), nobs=integer(0)) # result data frame to return\n  for (d in filedata){       # go through each file\n    d<-d[complete.cases(d),] # filter out observations with NA  \n    nobs<-nrow(d)            # how many clean rows\n    id=d[[1,4]]              # extract id of file\n    result[nrow(result)+1,]<-c(id,nobs)  # append to result data frame\n    }\n  # calculate and return the mean of the result variable\n  result\n}",
+    "created" : 1452897291349.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3492690948",
+    "id" : "15175706",
+    "lastKnownWriteTime" : 1452899396,
+    "path" : "C:/Users/cs/Dropbox/Connected Blue/Training/data science/git/datascience/R-Programming/week 2/complete.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
