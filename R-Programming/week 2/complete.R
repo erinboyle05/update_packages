@@ -12,9 +12,11 @@ complete<-function(directory="C:\\Users\\cs\\Dropbox\\Connected Blue\\Training\\
   for (d in filedata){       # go through each file
     d<-d[complete.cases(d),] # filter out observations with NA  
     nobs<-nrow(d)            # how many clean rows
-    id=d[[1,4]]              # extract id of file
+    if (nobs>0){
+      id=d[[1,4]]              # extract id of file
+    }
     result[nrow(result)+1,]<-c(id,nobs)  # append to result data frame
     }
-  # calculate and return the mean of the result variable
+  # calculate and return the result variable
   result
 }

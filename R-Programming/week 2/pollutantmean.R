@@ -12,5 +12,7 @@ pollutantmean<-function(directory="C:\\Users\\cs\\Dropbox\\Connected Blue\\Train
     result<-c(result, d[[pollutant]])  # append all the pollutant values from the remaining files onto the result variable
   }
   # calculate and return the mean of the result variable
+  result<-as.numeric(result)
+  #result
   mean(result, na.rm = TRUE)
 }
