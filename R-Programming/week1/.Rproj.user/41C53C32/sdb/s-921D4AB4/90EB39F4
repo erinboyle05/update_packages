@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1453479831129.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "90EB39F4",
+    "lastKnownWriteTime" : 27303497949970508,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "codvdld0io",
+        "caption" : "comm",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=comm&cache_key=codvdld0io",
+        "displayedObservations" : 6497,
+        "environment" : "",
+        "object" : "comm",
+        "totalObservations" : 6497,
+        "variables" : 188
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

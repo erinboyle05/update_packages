@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1454068000911.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "C9ED8115",
+    "lastKnownWriteTime" : 7011605692497750387,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "awcjzy87yz",
+        "caption" : "affyData",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=affyData&cache_key=awcjzy87yz",
+        "displayedObservations" : 58463,
+        "environment" : "",
+        "object" : "affyData",
+        "totalObservations" : 58463,
+        "variables" : 22
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}
