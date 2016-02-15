@@ -40,6 +40,18 @@ download_dataset<-function(url, filename="data", datasetname="",
   if(gitignore)  add_to_gitignore(c(filename, zipfilecontents))
 }
 
+
+#
+# A similar function to write a dataset in the current directory
+# and add to .gitignore
+#
+create_dataset<-function(df, filename, gitignore=TRUE, ...){
+        write.table(df, filename, ...)
+        if(gitignore)  add_to_gitignore(filename)
+}
+
+
+
 add_to_gitignore<-function(new_files_to_ignore){
         gitignore<-".gitignore"
         ensure_file_exists(gitignore)
