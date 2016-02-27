@@ -19,29 +19,28 @@ make_plot<-function(){
         if(!exists("NEI")) NEI <- readRDS("summarySCC_PM25.rds")
         if(!exists("NEI")) SCC <- readRDS("Source_Classification_Code.rds")
 
-        # Subset the data for Baltimore City, Maryland (fips == "24510") 
-        baltimore<-subset(NEI, fips == "24510")
-        baltimore$type<-as.factor(baltimore$type)
+        # Subset the SCC data to find all references to coal 
+        coal<-SCC[grepl("[Cc]oal", SCC$Short.Name),]
         
-        # Summarise baltimore by type and year
-        x<-ddply(baltimore, c("type", "year"), summarise, sum(Emissions))
-        # Change the name of column 3 - the total emissions per type 
-        colnames(x)[3]<-"AnnualEmission"
+        # Subset the NEI data to contain only pollution from coal sources
+        NEIcoal<-subset(NEI, SCC %in% coal$SCC)
+        
+        # Calculate annual Emissions from coal
+        total_em<-ddply(NEIcoal, c("year"), summarise, sum(Emissions)/1000)
+        
+        # Change the name of column 2 - the total emissions per type 
+        colnames(total_em)[2]<-"AnnualEmission"
         
         # print to png file
-        png("plot3.png")
+        png("plot4.png")
         
         # Prepare the plot
         par(mfrow=c(1,1), mar=c(4,4,2,2))
         
-        plot<-ggplot(x, aes(x=year, y=AnnualEmission, colour=type)) +
+        plot<-ggplot(total_em, aes(x=year, y=AnnualEmission)) +
                 geom_point()+ geom_line() +
-                ggtitle("Annual PM2.5 in Baltimore City by pollutant source") +
-                ylab("Annual Emissions (Tonnes)") +
-                scale_colour_discrete(name="Pollutant Source",
-                                    breaks=c("NON-ROAD", "NONPOINT", "ON-ROAD", "POINT"),
-                                    labels=c("Non Road", "Non Point", "On Road", "Point"))
-        
+                ggtitle("Annual U.S. PM2.5 Emissions from coal sources") +
+                ylab("Annual Emissions (Thousand Tonnes)")
         
         
         print(plot)
