@@ -5,6 +5,7 @@
 #
 
 library(ggplot2)
+library(plyr)
 
 make_plot<-function(){
         
@@ -17,7 +18,7 @@ make_plot<-function(){
         # create dataframe variables if not already present and clean up
         # it takes a while to load, so don't do it if already in memory
         if(!exists("NEI")) NEI <- readRDS("summarySCC_PM25.rds")
-        if(!exists("NEI")) SCC <- readRDS("Source_Classification_Code.rds")
+        if(!exists("SCC")) SCC <- readRDS("Source_Classification_Code.rds")
 
         # Subset the SCC data to find all references to coal 
         coal<-SCC[grepl("[Cc]oal", SCC$Short.Name),]

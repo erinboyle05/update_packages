@@ -20,28 +20,32 @@ make_plot<-function(){
         if(!exists("NEI")) NEI <- readRDS("summarySCC_PM25.rds")
         if(!exists("SCC")) SCC <- readRDS("Source_Classification_Code.rds")
 
-        # Subset the data for Baltimore City, Maryland (fips == "24510") 
-        baltimore<-subset(NEI, fips == "24510")
-        baltimore$type<-as.factor(baltimore$type)
+        # Subset the SCC data to find all references to coal 
+        motor<-SCC[grepl("[Mm]otor", SCC$SCC.Level.Three),]
         
-        # Summarise baltimore by type and year
-        x<-ddply(baltimore, c("type", "year"), summarise, sum(Emissions))
-        # Change the name of column 3 - the total emissions per type 
-        colnames(x)[3]<-"AnnualEmission"
+        # Subset the data for Motor Vehicle cources in Baltimore City, Maryland (fips == "24510")
+        # and Los Angeles County, California (fips == "06037")
+        baltLAMotor<-subset(NEI, (fips == "24510" | fips == "06037") & SCC %in% motor$SCC)
+
+        # Calculate annual Emissions from coal
+        total_em<-ddply(baltLAMotor, c("year", "fips"), summarise, sum(Emissions))
+        
+        # Change the name of column 2 - the total emissions per type 
+        colnames(total_em)[3]<-"AnnualEmission"
         
         # print to png file
-        png("plot3.png")
+        png("plot6.png")
         
         # Prepare the plot
         par(mfrow=c(1,1), mar=c(4,4,2,2))
         
-        plot<-ggplot(x, aes(x=year, y=AnnualEmission, colour=type)) +
+        plot<-ggplot(total_em, aes(x=year, y=AnnualEmission, colour=fips)) +
                 geom_point()+ geom_line() +
-                ggtitle("Annual PM2.5 in Baltimore City by pollutant source") +
-                ylab("Annual Emissions (Tonnes)") +
-                scale_colour_discrete(name="Pollutant Source",
-                                    breaks=c("NON-ROAD", "NONPOINT", "ON-ROAD", "POINT"),
-                                    labels=c("Non Road", "Non Point", "On Road", "Point"))
+                ggtitle("Area Comparison of Annual PM2.5 Emissions from motor sources") +
+                ylab("Annual Emissions (Tons)") +
+                scale_colour_discrete(name="FIPS Area",
+                                      breaks=c("06037", "24510"),
+                                      labels=c("Los Angeles County", "Baltimore City"))
         
         
         

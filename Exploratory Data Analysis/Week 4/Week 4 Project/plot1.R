@@ -11,12 +11,11 @@ make_plot<-function(){
         
         emission_dataset<-"https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
         download_dataset(emission_dataset, filename = "emmissions.zip", datasetname = "summarySCC_PM25.rds")
-        rm(emission_dataset)
 
         # create dataframe variables if not already present and clean up
         # it takes a while to load, so don't do it if already in memory
         if(!exists("NEI")) NEI <- readRDS("summarySCC_PM25.rds")
-        if(!exists("NEI")) SCC <- readRDS("Source_Classification_Code.rds")
+        if(!exists("SCC")) SCC <- readRDS("Source_Classification_Code.rds")
 
         # Calculate the total emissions per year in tonnes
         total_em<-with(NEI, tapply(Emissions, year, sum))
