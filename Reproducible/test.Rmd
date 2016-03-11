@@ -1,0 +1,42 @@
+First file
+============
+
+
+This is a test of the markdown capability
+
+* Bullets go
+* one after the
+* other
+
+Later on, we'll be able to add in code.
+
+
+
+```{r, echo=FALSE, results="hide"}
+`
+opts_chunk$set(cache=TRUE)
+# First load the datasets, but don't show this code
+library(datasets)
+data<-airquality
+```
+
+The airquality dataset is loaded into a variable called data so we can see it.
+
+```{r, echo=FALSE}
+head(data)
+```
+
+The first value of Ozone is `r data$Ozone[1]`.  Now we want to see how ozone varies by month:
+
+```{r ozoneByMonth, echo=FALSE}
+plot(data$Month, data$Ozone, pch=19)
+```
+
+The first few values of the data table are:
+
+```{r results="asis", echo=FALSE}
+library(xtable)
+print(xtable(head(data)), type="html")
+```
+
+This is a prettier version of the table
