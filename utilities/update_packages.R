@@ -40,7 +40,7 @@
 save_package_info <- function (package_file="./current_packages.rda") {
         
         # get list of currently installed packages and save current date and time
-        current_packages = as.data.frame(installed.packages())
+        current_packages <- as.data.frame(installed.packages())
         current_packages$as_at<-rep(Sys.Date(), nrow(current_packages))
         
         # save the dataframe to disk
@@ -59,14 +59,18 @@ reload_packages <- function (...) {
         biocLite(remaining_packages)
 }
 
-package_difference <- function (package_file="./current_packages.rda") {
+package_difference <- function (...) {
         
-        packages_from_file=readRDS(package_file)
-        current_packages = as.data.frame(installed.packages())
+        packages_from_file <- read_previous_packages(...)
+        current_packages <- as.data.frame(installed.packages())
         
         installed <- current_packages$Package
         previous <- packages_from_file$Package
         
         # return a vector of packages installed previously not in current setup
         as.character(previous[!(previous %in% installed)])
+}
+
+read_previous_packages <- function (package_file="./current_packages.rda") {
+        readRDS(package_file)
 }
